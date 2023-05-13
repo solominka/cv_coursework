@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<style>
+      .img-container {
+        text-align: center;
+      }
+</style>
+<script>
+    function blur_face(event) {
+        x = event.offsetX;
+        y = event.offsetY;
+        let xhr = new XMLHttpRequest();
+        let path = 'blur_face/' + x + '/' + y;
+
+        xhr.open('GET', path);
+        xhr.onload = function() {
+            location.reload();
+        };
+        xhr.send();
+    }
+</script>
+<body>
+<section>
+    <div class="container p-5">
+         <div class="img-container">
+             <img src="{{ user_image }}" alt="User Image" onclick="blur_face(event)">
+         </div>
+</section>
+</body>
+
+</html>
