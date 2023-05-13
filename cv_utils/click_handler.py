@@ -8,7 +8,7 @@ class ClickHandler:
         self.original_file_path = original_file_path  # for unblur
         self.current_image_path = current_image_path
 
-        cv2.imwrite(current_image_path, cv2.imread(original_file_path))
+        cv2.imwrite(current_image_path, cv2.imread(current_image_path))
         self.current_file_path = current_image_path
 
     def save_img_with_blurred_face_on_click(self, x, y):
