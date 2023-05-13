@@ -4,13 +4,13 @@ import cv2
 class FaceDetector:
 
     def __init__(self):
-        self.__face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+        self.__face_cascade = cv2.CascadeClassifier('cv_utils/haarcascade_frontalface_default.xml')
 
     def detect_and_draw_rectangles(self, file_path):
         img = cv2.imread(file_path)
-        prepped_ing = prep_image(img)
+        prepped_img = prep_image(img)
 
-        faces = self.__get_faces_coordinates(prepped_ing)
+        faces = self.__get_faces_coordinates(prepped_img)
         img = draw_rectangles(img, faces)
 
         return img, faces
