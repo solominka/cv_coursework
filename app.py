@@ -11,8 +11,6 @@ app = Flask(__name__, template_folder='templates', static_folder='static')
 UPLOAD_FOLDER = os.path.join('static', 'uploads')
 OUTPUT_FOLDER = os.path.join('static', 'output')
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 app.secret_key = 'not_a_secret'
 os.path.dirname("../templates")
 face_detector = FaceDetector()
