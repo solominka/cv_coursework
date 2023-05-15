@@ -1,7 +1,7 @@
 import os
 import cv2
 
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, render_template, request, session, redirect, send_file
 
 from utils import is_allowed_file
 from cv_utils.click_handler import ClickHandler
@@ -58,6 +58,12 @@ def blur_face(x, y):
     handler.save_img_with_blurred_face_on_click(int(x), int(y))
 
     return redirect('/show_file')
+
+
+@app.route('/download_file')
+def download():
+    path = session.get("output_img_file_path", None)
+    return send_file(path, as_attachment=True)
 
 
 if __name__ == '__main__':
