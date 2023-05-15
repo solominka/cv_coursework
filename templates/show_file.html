@@ -32,9 +32,13 @@
 <body>
 <section>
     <div class="container p-5">
-         <div class="img-container">
-             <img src="{{ user_image }}" alt="User Image" onclick="blur_face(event)">
-         </div>
+        <div class="img-container">
+            <img src="{{ user_image }}" alt="User Image" onclick="blur_face(event)">
+            <form action="/download_file">
+                <input type="submit" value="Download photo"/>
+            </form>
+        </div>
+    </div>
 </section>
 </body>
 
