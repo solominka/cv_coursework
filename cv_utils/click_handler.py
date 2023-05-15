@@ -6,7 +6,6 @@ class ClickHandler:
     def __init__(self, original_file_path, current_image_path, faces):
         self.faces = faces
         self.original_file_path = original_file_path  # for unblur
-        self.current_image_path = current_image_path
 
         cv2.imwrite(current_image_path, cv2.imread(current_image_path))
         self.current_file_path = current_image_path
