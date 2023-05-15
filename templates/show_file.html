@@ -14,25 +14,33 @@
       .img-container {
         text-align: center;
       }
+
+      .loader{width:60px;height:60px;background:0 0;border:10px solid transparent;border-top-color:#007bff;border-left-color:#007bff;border-radius:50%;animation:loader .75s 10 ease forwards}@keyframes loader{100%{transform:rotate(360deg)}}
 </style>
 <script>
     function blur_face(event) {
         x = event.offsetX;
         y = event.offsetY;
         let xhr = new XMLHttpRequest();
-        let path = 'blur_face/' + x + '/' + y;
 
-        xhr.open('GET', path);
-        xhr.onload = function() {
+        xhr.onreadystatechange = function() {
+			if (this.readyState !== 4)
+				document.getElementById('img-container').innerHTML = '<div class="loader"></div>';
+			}
+	    xhr.onload = function() {
             location.reload();
         };
+
+        let path = 'blur_face/' + x + '/' + y;
+        xhr.open('GET', path);
+
         xhr.send();
     }
 </script>
 <body>
 <section>
     <div class="container p-5">
-        <div class="img-container">
+        <div id="img-container" class="img-container">
             <img src="{{ user_image }}" alt="User Image" onclick="blur_face(event)">
             <form action="/download_file">
                 <input type="submit" value="Download photo"/>
