@@ -1,5 +1,6 @@
 import os
 import cv2
+from cv_utils.face import map_faces, unmap_faces
 
 from flask import Flask, render_template, request, session, redirect, send_file
 
@@ -43,7 +44,7 @@ def show_file():
         output_image, faces = face_detector.detect_and_draw_rectangles(uploaded_image_path)
         cv2.imwrite(output_image_path, output_image)
         session['rectangles_drawn'] = True
-        session['faces'] = faces.tolist()
+        session['faces'] = map_faces(faces)
 
     return render_template('show_file.html', user_image=output_image_path)
 
@@ -52,7 +53,7 @@ def show_file():
 def blur_face(x, y):
     uploaded_image_path = session.get('uploaded_img_file_path', None)
     output_image_path = session.get("output_img_file_path", None)
-    faces = session.get('faces', None)
+    faces = unmap_faces(session.get('faces', None))
 
     handler = ClickHandler(uploaded_image_path, output_image_path, faces)
     handler.save_img_with_blurred_face_on_click(int(x), int(y))

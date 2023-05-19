@@ -20,9 +20,9 @@ class ClickHandler:
         return self.current_file_path
 
     def __get_face_by_click(self, x_click, y_click):
-        for (x, y, w, h) in self.faces:
-            if x <= x_click <= x + w and y <= y_click <= y + h:
-                return x, y, w, h
+        for f in self.faces:
+            if f.x <= x_click <= f.x + f.w and f.y <= y_click <= f.y + f.h:
+                return f.x, f.y, f.w, f.h
         return -1, -1, -1, -1
 
     def __get_blurred_face(self, x, y, w, h):
