@@ -1,5 +1,5 @@
 import json
-from json import JSONEncoder, JSONDecoder
+from json import JSONEncoder
 
 
 class Face:

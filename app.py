@@ -57,6 +57,7 @@ def blur_face(x, y):
 
     handler = ClickHandler(uploaded_image_path, output_image_path, faces)
     handler.save_img_with_blurred_face_on_click(int(x), int(y))
+    session['faces'] = map_faces(handler.faces)
 
     return redirect('/show_file')
 
