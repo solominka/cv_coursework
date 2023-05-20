@@ -1,5 +1,7 @@
 import os
 import cv2
+
+from cv_utils.download_handler import save_file_to_download
 from cv_utils.face import map_faces, unmap_faces
 
 from flask import Flask, render_template, request, session, redirect, send_file
@@ -31,6 +33,7 @@ def upload_file():
         _img.save(os.path.join(UPLOAD_FOLDER, filename))
         session['uploaded_img_file_path'] = os.path.join(UPLOAD_FOLDER, filename)
         session['output_img_file_path'] = os.path.join(OUTPUT_FOLDER, filename)
+        session['download_img_file_path'] = os.path.join(OUTPUT_FOLDER, "to_download_" + filename)
         session['rectangles_drawn'] = False
         return render_template('index.html', success=True)
 
@@ -64,8 +67,12 @@ def blur_face(x, y):
 
 @app.route('/download_file')
 def download():
-    path = session.get("output_img_file_path", None)
-    return send_file(path, as_attachment=True)
+    uploaded_image_path = session.get('uploaded_img_file_path', None)
+    download_path = session.get("download_img_file_path", None)
+    faces = unmap_faces(session.get('faces', None))
+
+    save_file_to_download(uploaded_image_path, download_path, faces)
+    return send_file(download_path, as_attachment=True)
 
 
 if __name__ == '__main__':

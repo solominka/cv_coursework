@@ -30,7 +30,7 @@ class ClickHandler:
     def __get_blurred_face(self, f):
         img = cv2.imread(self.current_file_path)
         blurred = img.copy()
-        blurred_part = cv2.blur(img[f.y:f.y + f.h, f.x:f.x + f.w], ksize=(100, 100), )
+        blurred_part = cv2.blur(img[f.y:f.y + f.h, f.x:f.x + f.w], ksize=(100, 100))
         blurred[f.y:f.y + f.h, f.x:f.x + f.w] = blurred_part
         f.is_blurred = True
         return blurred
